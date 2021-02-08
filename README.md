@@ -9,8 +9,8 @@
 |  Column                |  Type      |  Options       |
 |  --------------------  |  --------  |  ------------  |
 |  nickname              |  string    |  null:  false  |
-|  email                 |  string    |  null:  false  |
-|  encrypted_password    |  string    |  unique: true  |
+|  email                 |  string    |  unique: true  |
+|  encrypted_password    |  string    |  null:  false  |
 |  name                  |  string    |  null:  false  |
 |  name_kana             |  string    |  null:  false  |
 |  birthday              |  date      |  null:  false  |
@@ -26,20 +26,20 @@
 |  ---------------  |  ---------  |  ------------       |
 |  product_name     |  string     |  null:  false       |
 |  description      |  text       |  null:  false       |
-|  category         |  string     |  null:  false       |
+|  category_id      |  integer    |  null:  false       |
 |  state_id         |  integer    |  null:  false       |
 |  deliver_fee_id   |  integer    |  null:  false       |
 |  shipment_id      |  integer    |  null:  false       | 
 |  shipment_day_id  |  integer    |  null:  false       |
 |  price            |  integer    |  null:  false       |
-|  seller           |  reference  |  foreign_key: true  |
+|  user             |  reference  |  foreign_key: true  |
 
 ＊imageはActiveStorageで実装
 
 ### アソシエーション
 
 - belongs_to :user
-- belongs_to :buyer
+- has_one  :buyer
 
 ## buyersテーブル
 
@@ -53,19 +53,20 @@
 
 - belongs_to :user
 - belongs_to :product
-- has_one :buyer
+- has_one :buyers_addresses
 
 
 ## buyers_addressesテーブル
 
-|  Column            |  Type       |  Options       |
-|  ----------------- |  ---------  |  ------------  |
-|  shipping_address  |  string     |  null:  false  |
-|  postal_code       |  string     |  null:  false  |
-|  region            |  string     |  null:  false  |
-|  city              |  string     |  null:  false  |
-|  house_number      |  string     |  null:  false  |
-|  tell              |  string     |  null:  false  |
+|  Column            |  Type       |  Options            |
+|  ----------------- |  ---------  |  -----------------  |
+|  postal_code       |  string     |  null:  false       |
+|  region_id         |  integer    |  null:  false       |
+|  city              |  string     |  null:  false       |
+|  house_number      |  string     |  null:  false       |
+|  building          |  string     |                     |
+|  tell              |  string     |  null:  false       |
+|  buyer             |  reference  |  foreign_key: true  |
 
 
 ### アソシエーション
