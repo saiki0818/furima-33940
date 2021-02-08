@@ -6,13 +6,14 @@
 
 ## usersテーブル
 
-|  Column      |  Type      |  Options       |
-|  ----------  |  --------  |  ------------  |
-|  nickname    |  string    |  null:  false  |
-|  email       |  string    |  null:  false  |
-|  password    |  string    |  null:  false  |
-|  name        |  string    |  null:  false  |
-|  birthday    |  string    |  null:  false  |
+|  Column                |  Type      |  Options       |
+|  --------------------  |  --------  |  ------------  |
+|  nickname              |  string    |  null:  false  |
+|  email                 |  string    |  null:  false  |
+|  encrypted_password    |  string    |  unique: true  |
+|  name                  |  string    |  null:  false  |
+|  name_kana             |  string    |  null:  false  |
+|  birthday              |  date      |  null:  false  |
 
 ### アソシエーション
 
@@ -21,17 +22,17 @@
 
 ## productsテーブル
 
-|  Column        |  Type       |  Options       |
-|  ------------  |  ---------  |  ------------  |
-|  product_name  |  string     |  null:  false  |
-|  description   |  text       |  null:  false  |
-|  category      |  string     |  null:  false  |
-|  state         |  string     |  null:  false  |
-|  deliver_fee   |  string     |  null:  false  |
-|  shipment      |  string     |  null:  false  |
-|  shipment_day  |  string     |  null:  false  |
-|  price         |  string     |  null:  false  |
-|  seller        |  reference  |                |
+|  Column           |  Type       |  Options            |
+|  ---------------  |  ---------  |  ------------       |
+|  product_name     |  string     |  null:  false       |
+|  description      |  text       |  null:  false       |
+|  category         |  string     |  null:  false       |
+|  state_id         |  integer    |  null:  false       |
+|  deliver_fee_id   |  integer    |  null:  false       |
+|  shipment_id      |  integer    |  null:  false       | 
+|  shipment_day_id  |  integer    |  null:  false       |
+|  price            |  integer    |  null:  false       |
+|  seller           |  reference  |  foreign_key: true  |
 
 ＊imageはActiveStorageで実装
 
@@ -42,16 +43,17 @@
 
 ## buyersテーブル
 
-|  Column   |  Type       |  Options       |
-|  -------- |  ---------  |  ------------  |
-|  user     |  reference  |                |
-|  product  |  reference  |                |
+|  Column   |  Type       |  Options            |
+|  -------- |  ---------  |  -----------------  |
+|  user     |  reference  |  foreign_key: true  |
+|  product  |  reference  |  foreign_key: true  |
 
 
 ### アソシエーション
 
 - belongs_to :user
 - belongs_to :product
+- has_one :buyer
 
 
 ## buyers_addressesテーブル
@@ -68,4 +70,4 @@
 
 ### アソシエーション
 
-- has_one :buyer
+- belongs_to :buyers
