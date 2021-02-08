@@ -6,14 +6,16 @@
 
 ## usersテーブル
 
-|  Column                |  Type      |  Options       |
-|  --------------------  |  --------  |  ------------  |
-|  nickname              |  string    |  null:  false  |
-|  email                 |  string    |  unique: true  |
-|  encrypted_password    |  string    |  null:  false  |
-|  name                  |  string    |  null:  false  |
-|  name_kana             |  string    |  null:  false  |
-|  birthday              |  date      |  null:  false  |
+|  Column                |  Type      |  Options                    |
+|  --------------------  |  --------  |  -------------------------  |
+|  nickname              |  string    |  null:  false               |
+|  email                 |  string    |  unique: true, null: false  |
+|  encrypted_password    |  string    |  null:  false               |
+|  last_name             |  string    |  null:  false               |
+|  last_name_kana        |  string    |  null:  false               |
+|  first_name            |  string    |  null:  false               |
+|  first_name_kana       |  string    |  null:  false               |
+|  birthday              |  date      |  null:  false               |
 
 ### アソシエーション
 
@@ -53,7 +55,7 @@
 
 - belongs_to :user
 - belongs_to :product
-- has_one :buyers_addresses
+- has_one :buyer_address
 
 
 ## buyers_addressesテーブル
@@ -71,4 +73,4 @@
 
 ### アソシエーション
 
-- belongs_to :buyers
+- belongs_to :buyer
