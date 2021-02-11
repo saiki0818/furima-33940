@@ -12,6 +12,9 @@ RSpec.describe Product, type: :model do
    
 
    describe '商品出品機能' do
+     it "全ての値が正しい場合、出品できる" do
+      expect(@product).to be_valid
+     end
      it "商品画像を1枚つけることが必須であること" do
       @product.image = nil
       @product.valid?
