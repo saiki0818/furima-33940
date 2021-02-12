@@ -12,9 +12,14 @@ RSpec.describe Product, type: :model do
    
 
    describe '商品出品機能' do
+    
+    context "出品できる場合" do
      it "全ての値が正しい場合、出品できる" do
       expect(@product).to be_valid
      end
+    end
+    
+    context "出品できない場合" do
      it "商品画像を1枚つけることが必須であること" do
       @product.image = nil
       @product.valid?
@@ -69,6 +74,22 @@ RSpec.describe Product, type: :model do
       @product.price = '１５００'
       @product.valid?
       expect(@product.errors.full_messages).to include("Price is not a number")
+     end
+      it "半角英数混合では出品できないこと" do
+        @product.price = '1200d4'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it "半角英語だけでは登録できないこと" do
+        @product.price = 'abcde'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it "10,000,000以上では出品できないこと" do
+        @product.price = '15000000'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price must be less than 10000000")
+      end
     end
    end
   end
