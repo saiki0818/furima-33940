@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :product_method, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new,:create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :edit_user, only: [:edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   
