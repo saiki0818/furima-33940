@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :product_method, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, expect: [:index,:show]
+  before_action :authenticate_user!, only: [:new,:create]
   before_action :edit_user, only: [:edit, :update, :destroy]
   
   def index
