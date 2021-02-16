@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  before_action :product_method, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :edit_user, only: [:edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
@@ -48,10 +47,6 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:image, :product_name, :description, :category_id, :state_id, :deliver_fee_id, :shipment_id, :shipment_day_id, :price).merge(user_id: current_user.id)
-  end
-
-  def product_method
-    @product = Product.find(params[:id])
   end
 
   def edit_user
