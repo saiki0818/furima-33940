@@ -6,8 +6,7 @@ RSpec.describe BuyerAddress, type: :model do
       @user = FactoryBot.create(:user)
       @product = FactoryBot.create(:product)
       @buyer_address = FactoryBot.build(:buyer_address, user_id: @user.id, product_id: @product.id)
-      binding.pry
-      
+      sleep 0.1
     end
 
 describe '商品の購入' do
@@ -19,7 +18,55 @@ describe '商品の購入' do
 
   context '購入できないとき' do
     it '郵便番号が入力必須であること' do
+      @buyer_address.postal_code = ""
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Postal code can't be blank")
     end
-  end
+    it '郵便番号はハイフンなしで購入できないこと' do
+      @buyer_address.postal_code = "4003000"
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it '郵便番号は半角数字でないと購入できないこと' do
+      @buyer_address.postal_code = "６５４-２３４５"
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it '都道府県の入力が必須であること' do
+      @buyer_address.shipment_id = ''
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Shipment can't be blank")
+    end
+    it '都道府県の入力が必須であること' do
+      @buyer_address.shipment_id = '1'
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Shipment must be other than 1")
+    end
+    it '市町村の入力が必須であること' do
+    @buyer_address.city = ""
+    @buyer_address.valid?
+    expect(@buyer_address.errors.full_messages).to include("City can't be blank")
+    end
+    it '番地の入力が必須であること' do
+      @buyer_address.house_number = ''
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("House number can't be blank")
+    end
+    it '電話番号の入力が必須であること' do
+      @buyer_address.tell = ''
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Tell can't be blank")
+    end
+    it '電話番号は数値のみで入力が必須であること' do
+      @buyer_address.tell = '0801234asdf'
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Tell is invalid")
+    end
+    it '電話番号は半角数字のみで入力しなければいけないこと' do
+      @buyer_address.tell = '１２３４５６７８９０１'
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Tell is invalid")
+      end
+end
 end
 end

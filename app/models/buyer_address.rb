@@ -10,7 +10,6 @@ class BuyerAddress
     validates :city
     validates :house_number
     validates :tell, format:{with: /\A[0-9]+\z/}
-    # validates :buyer_id
   end
 
   def save
