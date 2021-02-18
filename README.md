@@ -63,7 +63,7 @@
 |  city              |  string     |  null:  false       |
 |  house_number      |  string     |  null:  false       |
 |  building          |  string     |                     |
-|  tell              |  integer    |  null:  false       |
+|  tell              |  string    |  null:  false        |
 |  buyer             |  reference  |  foreign_key: true  |
 
 

@@ -10,12 +10,12 @@ class BuyerAddress
     validates :city
     validates :house_number
     validates :tell, format:{with: /\A[0-9]+\z/}
-    validates :buyer_id
+    # validates :buyer_id
   end
 
   def save
     buyer = Buyer.create(user_id: user_id, product_id: product_id)
-    BuyerAddrress.create(postel_code: postel_code, shipment_id: shipment_id, city: city, house_number: house_number, tell: tell, buyer_id: buyer_id)
+    Address.create(postel_code: postel_code, shipment_id: shipment_id, city: city, house_number: house_number, tell: tell, buyer_id: buyer.id)
   end
 
 end
