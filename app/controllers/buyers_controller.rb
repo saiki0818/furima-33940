@@ -32,9 +32,9 @@ class BuyersController < ApplicationController
     def pay_product
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-        amount: @product.price,  # 商品の値段
-        card: buyer_address_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
+        amount: @product.price,
+        card: buyer_address_params[:token],
+        currency: 'jpy'
       )
     end
 

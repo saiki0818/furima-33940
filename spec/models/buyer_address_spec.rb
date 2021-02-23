@@ -14,6 +14,10 @@ describe '商品の購入' do
     it '全ての情報を正しく入力すれば購入できる' do
       expect(@buyer_address).to be_valid
     end
+    it '建物情報が空でも購入できること' do
+      @buyer_address.building = ""
+      expect(@buyer_address).to be_valid
+    end
   end
 
   context '購入できないとき' do
