@@ -9,13 +9,13 @@ class BuyerAddress
     validates :shipment_id, numericality: { other_than: 1 }
     validates :city
     validates :house_number
-    validates :tell, format:{with: /\A[0-9]+\z/}
+    validates :tell, format:{with: /\A[0-9]{10,11}+\z/}
     validates :token
   end
 
   def save
     buyer = Buyer.create(user_id: user_id, product_id: product_id)
-    Address.create(postal_code: postal_code, shipment_id: shipment_id, city: city, house_number: house_number, tell: tell, buyer_id: buyer.id)
+    Address.create(postal_code: postal_code, shipment_id: shipment_id, city: city, house_number: house_number, building: building, tell: tell, buyer_id: buyer.id)
   end
 
 end

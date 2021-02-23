@@ -17,6 +17,16 @@ describe '商品の購入' do
   end
 
   context '購入できないとき' do
+    it 'user_idが空では保存できないこと' do
+      @buyer_address.user_id = ""
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("User can't be blank")
+    end
+    it 'product_idが空では保存できないこと' do
+      @buyer_address.product_id = ""
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Product can't be blank")
+    end
     it '郵便番号が入力必須であること' do
       @buyer_address.postal_code = ""
       @buyer_address.valid?
@@ -38,7 +48,7 @@ describe '商品の購入' do
       expect(@buyer_address.errors.full_messages).to include("Shipment can't be blank")
     end
     it '都道府県の入力が必須であること' do
-      @buyer_address.shipment_id = '1'
+      @buyer_address.shipment_id = 1
       @buyer_address.valid?
       expect(@buyer_address.errors.full_messages).to include("Shipment must be other than 1")
     end
@@ -64,6 +74,11 @@ describe '商品の購入' do
     end
     it '電話番号は半角数字のみで入力しなければいけないこと' do
       @buyer_address.tell = '１２３４５６７８９０１'
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Tell is invalid")
+    end
+    it '電話番号は11桁以内の数値のみで入力しなければいけないこと' do
+      @buyer_address.tell = '111122223333'
       @buyer_address.valid?
       expect(@buyer_address.errors.full_messages).to include("Tell is invalid")
     end
