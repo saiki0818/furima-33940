@@ -51,19 +51,19 @@
 
 - belongs_to :user
 - belongs_to :product
-- has_one :buyer_address
+- has_one :address
 
 
-## buyers_addressesテーブル
+## addressesテーブル
 
 |  Column            |  Type       |  Options            |
 |  ----------------- |  ---------  |  -----------------  |
 |  postal_code       |  string     |  null:  false       |
-|  region_id         |  integer    |  null:  false       |
+|  shipment_id       |  integer    |  null:  false       |
 |  city              |  string     |  null:  false       |
 |  house_number      |  string     |  null:  false       |
 |  building          |  string     |                     |
-|  tell              |  string     |  null:  false       |
+|  tell              |  string    |  null:  false        |
 |  buyer             |  reference  |  foreign_key: true  |
 
 

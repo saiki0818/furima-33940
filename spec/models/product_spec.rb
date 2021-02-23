@@ -6,7 +6,6 @@ RSpec.describe Product, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @product = FactoryBot.build(:product, user_id: @user.id)
-    @product.image = fixture_file_upload("test/fixtures/files/test_image.png")
    end
 
    
