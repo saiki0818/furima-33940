@@ -1,6 +1,6 @@
 class BuyerAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :product_id, :postal_code, :shipment_id, :city, :house_number, :building, :tell, :buyer_id
+  attr_accessor :user_id, :product_id, :postal_code, :shipment_id, :city, :house_number, :building, :tell, :buyer_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class BuyerAddress
     validates :city
     validates :house_number
     validates :tell, format:{with: /\A[0-9]+\z/}
+    validates :token
   end
 
   def save

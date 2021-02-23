@@ -66,7 +66,12 @@ describe '商品の購入' do
       @buyer_address.tell = '１２３４５６７８９０１'
       @buyer_address.valid?
       expect(@buyer_address.errors.full_messages).to include("Tell is invalid")
-      end
-end
-end
-end
+    end
+    it "tokenが空では登録できないこと" do
+      @buyer_address.token = nil
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
+    end
+   end
+  end
+ end
