@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
 
   def confirm_buyer
     if @product.buyer.present?
-      redirect_to root_path
+       redirect_to root_path
   end
  end
 
